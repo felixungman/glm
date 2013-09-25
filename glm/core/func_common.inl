@@ -713,7 +713,7 @@ namespace detail
 		genType const & x
 	)
 	{
-		return mix(genType(1), genType(0), glm::lessThan(x, edge));
+		return mix(genType(1), genType(0), x < edge ? genType(1) : genType(0));
 	}
 
 	template <template <typename, precision> class vecType, typename T, precision P>
