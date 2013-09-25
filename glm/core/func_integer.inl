@@ -49,9 +49,9 @@ namespace glm
 		genUType & Carry
 	)
 	{
-		detail::highp_uint_t Value64 = detail::highp_uint_t(x) + detail::highp_uint_t(y);
-		genUType Result = genUType(Value64 % (detail::highp_uint_t(1) << detail::highp_uint_t(32)));
-		Carry = (Value64 % (detail::highp_uint_t(1) << detail::highp_uint_t(32))) > 1 ? 1 : 0;
+		detail::uint64 Value64 = detail::uint64(x) + detail::uint64(y);
+		genUType Result = genUType(Value64 % (detail::uint64(1) << detail::uint64(32)));
+		Carry = (Value64 % (detail::uint64(1) << detail::uint64(32))) > 1 ? 1 : 0;
 		return Result;
 	}
 
@@ -108,9 +108,9 @@ namespace glm
 	{
 		Borrow = x >= y ? 0 : 1;
 		if(x > y)
-			return genUType(detail::highp_int_t(x) - detail::highp_int_t(y));
+			return genUType(detail::int64(x) - detail::int64(y));
 		else
-			return genUType((detail::highp_int_t(1) << detail::highp_int_t(32)) + detail::highp_int_t(x) - detail::highp_int_t(y));
+			return genUType((detail::int64(1) << detail::int64(32)) + detail::int64(x) - detail::int64(y));
 	}
 
 	template <typename T, precision P>
@@ -165,11 +165,11 @@ namespace glm
 		genUType & lsb
 	)
 	{
-		detail::highp_uint_t ValueX64 = x;
-		detail::highp_uint_t ValueY64 = y;
-		detail::highp_uint_t Value64 = ValueX64 * ValueY64;
-		msb = *(genUType*)&genUType(Value64 & ((detail::highp_uint_t(1) << detail::highp_uint_t(32)) - detail::highp_uint_t(1)));
-		lsb = *(genUType*)&genUType(Value64 >> detail::highp_uint_t(32));
+		detail::uint64 ValueX64 = x;
+		detail::uint64 ValueY64 = y;
+		detail::uint64 Value64 = ValueX64 * ValueY64;
+		msb = *(genUType*)&genUType(Value64 & ((detail::uint64(1) << detail::uint64(32)) - detail::uint64(1)));
+		lsb = *(genUType*)&genUType(Value64 >> detail::uint64(32));
 	}
 
 	template <typename T, precision P>
@@ -227,11 +227,11 @@ namespace glm
 		genIType & lsb
 	)
 	{
-		detail::highp_int_t ValueX64 = x;
-		detail::highp_int_t ValueY64 = y;
-		detail::highp_int_t Value64 = ValueX64 * ValueY64;
-		msb = *(genIType*)&genIType(Value64 & ((detail::highp_uint_t(1) << detail::highp_uint_t(32)) - detail::highp_uint_t(1)));
-		lsb = *(genIType*)&genIType(Value64 >> detail::highp_uint_t(32));
+		detail::int64 ValueX64 = x;
+		detail::int64 ValueY64 = y;
+		detail::int64 Value64 = ValueX64 * ValueY64;
+		msb = *(genIType*)&genIType(Value64 & ((detail::uint64(1) << detail::uint64(32)) - detail::uint64(1)));
+		lsb = *(genIType*)&genIType(Value64 >> detail::uint64(32));
 	}
 
 	template <typename T, precision P>
